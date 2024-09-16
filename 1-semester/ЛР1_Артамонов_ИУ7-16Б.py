@@ -20,7 +20,7 @@ cone_l = sqrt(sphere_r ** 2 + cone_h ** 2)  # образующая конуса
 
 # 2. Вычисление объемов (V)
 sphere_v = 4/3 * pi * sphere_r ** 3  # V шара
-small_segment_v = pi * cone_h ** 2 * (3 * sphere_r - cone_h) / 3 # V малой отсеченной части шара
+small_segment_v = pi * cone_h ** 2 * (3 * sphere_r - cone_h) / 3  # V малой отсеченной части шара
 big_segment_v = sphere_v - small_segment_v  # V большой отсеченной части шара
 cone_v = 1/3 * cone_r * cone_h  # V конуса
 sector_v = big_segment_v + cone_v  # V сектора
