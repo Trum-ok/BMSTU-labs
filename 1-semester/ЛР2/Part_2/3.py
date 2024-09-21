@@ -8,6 +8,7 @@
 """
 
 
+# 0. Определение графиков ф-ий "бабочки"
 def y1(x: float) -> float:
     return -1/8 * (x - 9)**2 + 8
 
@@ -40,6 +41,7 @@ def y8(x: float) -> float:
     return 1/3 * (x - 5)**2 - 7
 
 
+# 1. Определение ф-ии проверки
 def check(x: float, y: float) -> bool:
     """Проверяет принадлежность точки к области"""
     if y >= 0:
@@ -66,6 +68,7 @@ def check(x: float, y: float) -> bool:
     return False
 
 
+# 2. Запуск программы, ввод координат точки, вывод ответа
 if __name__ == '__main__':
     x = abs(float(input('Введите x: ')))
     y = float(input('Введите y: '))
