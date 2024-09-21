@@ -29,4 +29,4 @@ def y(x: float) -> float:
 if __name__ == "__main__":
     x = float(input('Введите x: '))
 
-    print(f"Ответ: y = {y(float(x))}")
+    print(f"Ответ: y = {y(float(x)):5g}")
