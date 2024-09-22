@@ -8,27 +8,18 @@
 """
 
 
-# 0. Определение функций y(x)
-def y1(x: float) -> float:
-    return -2 * x + 4
-
-
-def y2(x: float) -> float:
-    return -1/4 * x**2 + 1
-
-
-# 1. Определеие функции проверки принадлежности точки
+# 0. Определеие функции проверки принадлежности точки
 def check(x: float, y: float) -> bool:
     if x > 6:
         return False
     if x >= 2 and x <= 6:
-        return y >= y1(x) and y <= y2(x)
+        return y >= (-2 * x + 4) and y <= (-1/4 * x**2 + 1)
     elif x >= 0 and x <= 2:
-        return y >= y2(x) and y <= y1(x)
+        return y >= (-1/4 * x**2 + 1) and y <= (-2 * x + 4)
     return False
 
 
-# 2. Ввод координат точки, проверка принадлежности точки и вывод ответа
+# 1. Ввод координат точки, проверка принадлежности точки и вывод ответа
 if __name__ == '__main__':
     x = abs(float(input('Введите x: ')))
     y = float(input('Введите y: '))
