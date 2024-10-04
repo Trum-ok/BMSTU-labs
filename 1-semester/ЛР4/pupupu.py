@@ -18,9 +18,9 @@ def main(x: float, epsilon: float, its: int, step: int) -> Tuple[float, int]:
     n = 1  # счетчик нечётных степеней (2n+1)
     iteration = 1
 
-    print("-" * 39)
+    print("+" + "-" * 38 + "+")
     print(f"| {'№ итерации':^10} | {'t':^10} | {'s':^10} |")
-    print("-" * 39)
+    print("+" + "-" * 38 + "+")
     print(f"| {iteration:<10} | {term:^10.5g} | {sum_series:^10.5g} |")
 
     # итерации + таблица
@@ -31,11 +31,11 @@ def main(x: float, epsilon: float, its: int, step: int) -> Tuple[float, int]:
         n += 1
         iteration += 1
 
-        if (iteration % step == 1) or (step == 1):
+        if (iteration % step == 1) or (step == 1):  # каждые n шагов вывода
             print(f"| {iteration:<10} | {term:^10.5g} | {sum_series:^10.5g} |")
-    print("-" * 39)
+    print("+" + "-" * 38 + "+")
 
-    if (abs(term) < epsilon):
+    if (abs(term) > epsilon) and (its <= iteration):  # если не удалось высчитать сумму за указанные параметры
         return -1, -1
 
     return sum_series, iteration
