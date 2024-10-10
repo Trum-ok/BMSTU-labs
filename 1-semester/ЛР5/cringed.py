@@ -10,12 +10,16 @@
 from decimal import Decimal, getcontext
 getcontext().prec = 6
 
-t0 = Decimal(-0.5)
-step = Decimal(0.05)
-tn = Decimal(0.5)
+# t0 = Decimal(-0.5)
+# step = Decimal(0.05)
+# tn = Decimal(0.5)
+t0 = Decimal(float(input("Введите начальное значение t0: ")))
+step = Decimal(float(input("Введите шаг: ")))
+tn = Decimal(float(input("Введите конечное значение tn: ")))
 
-characters = 100
-eps = 2e-1 - 0.1
+# characters = 80
+characters = int(input("Введите ширину графика: "))
+eps = 2e-1 - 0.15
 
 w_min = 10 * 10
 w_max = 1e-10
@@ -41,17 +45,17 @@ for i in range(iters):
     t0 += step
 
 print("+" + '-' * 30 + "+")
-print("\n",
-      "+" + "-" * 38 + "+",
-      f"| w_min = {w_min} | t_min = {t_min} |",
-      "+" + "-" * 38 + "+"
-      "\n", sep='\n')
+print("\n\n",
+      f"w_min = {w_min} | t_min = {t_min}", end= ""
+      )
+
 
 # мин и макс значеня для OW (Oy)
 ymin, ymax = w_min, w_max  # ~ диапазон значений функции
 xmin, xmax = Decimal(-0.5), tn
 division_price = abs(xmin - xmax) / characters
 
+print("\n")
 ticks_y = int(input("Введите количество засечек для оси W (от 4 до 8): "))
 print("\n")
 
@@ -99,13 +103,25 @@ r_count = x_count // 2 + (1 if iters % 2 != 0 else 0)
 symb = l_count * 5 + r_count * 4
 c = (symb // (x_count - 1)) + 1
 
+# for i in range(iters):
+#     if i % 2 == 0:
+#         t = Decimal(-0.5) + i * x_step
+#         posx = round((t - Decimal(-0.5)) / (Decimal(0.5) - Decimal(-0.5)) * (characters - 1))
+#         print(f'{t:^5.2g}', end=' ' * c)
+
+#         if i < iters - 1:  # лишний пробел в конце
+#             print(' ' * (characters // iters - len(f'{t:^5.2g}')), end='')
+
+# print()
+
 for i in range(iters):
     if i % 2 == 0:
         t = Decimal(-0.5) + i * x_step
-        posx = round((t - Decimal(-0.5)) / (Decimal(0.5) - Decimal(-0.5)) * (characters - 1))
-        print(f'{t:^5.2g}', end=' ' * c)
+        label = f'{t:^5.1g}'
 
-        if i < iters - 1:  # лишний пробел в конце
-            print(' ' * (characters // iters - len(f'{t:^5.2g}')), end='')
+        total_width = characters // iters
+        padding = total_width - len(label)
+
+        print(f"{label}{' '*(characters//(iters+2))}", end="")
 
 print()
