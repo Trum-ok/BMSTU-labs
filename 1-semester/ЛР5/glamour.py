@@ -113,7 +113,6 @@ for i in range(iters):
             if posw <= (characters + 5):
                 print("{:>{}}".format('*', posw-posw_zero), end='')
 
-    w += step
     # print(f"({W})")
     print()
 

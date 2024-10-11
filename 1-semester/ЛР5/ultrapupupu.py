@@ -8,10 +8,15 @@
 """
 
 # Ввод данных
-tz = float(input("Введите начальное значение t0: "))
-step = float(input("Введите шаг: "))
-tn = float(input("Введите конечное значение tn: "))
-characters = int(input("Введите ширину графика: "))
+# tz = float(input("Введите начальное значение t0: "))
+# step = float(input("Введите шаг: "))
+# tn = float(input("Введите конечное значение tn: "))
+# characters = int(input("Введите ширину графика: "))
+
+tz = -0.5
+step = 0.05
+tn = 0.5
+characters = 100
 
 flag = (step <= 0) or (characters < 80) or (characters >= 180) or (tz >= tn)
 if flag:
@@ -30,8 +35,8 @@ print('+' + '-' * 30 + "+",
       '|------------+-----------------|', sep='\n')
 
 for i in range(iters):
-    W = (2048 * t0**12) - (6144 * t0**10) + (6912 * t0**8) - (3584 * t0**6) + (840 * t0**4) - (72 * t0**2) + 1
-    if abs(t0) < 1e-17:
+    W = (2048 * t0**12) - (6144 * t0**10) + (6912 * t0**8) - (3584 * t0**6) + (840 * t0**4) - (72 * t0**2) + 1  # noqa: E501
+    if abs(t0) < 1e-16:
         t0 = 0.0
     if W < w_min:
         w_min = W
@@ -85,7 +90,7 @@ for i in range(iters):
 
     print(f'{t:>10.2f} |', end='')  # Значения по оси t
 
-    W = (2048 * t**12) - (6144 * t**10) + (6912 * t**8) - (3584 * t**6) + (840 * t**4) - (72 * t**2) + 1
+    W = (2048 * t**12) - (6144 * t**10) + (6912 * t**8) - (3584 * t**6) + (840 * t**4) - (72 * t**2) + 1  # noqa: E501
     normalized_w = W + w_min
     posw = (normalized_w // division_price) + 1
     posw += 99
@@ -93,15 +98,16 @@ for i in range(iters):
     posw_zero = (w_min * characters) // abs(w_min - w_max)  + characters
 
     if posw <= posw_zero:
-        # Построение оси и точки графика
         if posw <= (characters + 5):
-            print("{:>{}}".format('*', posw + 1), end='')
-        print("{:>{}}".format('|', posw_zero - posw - 1), end='')
+            print(f'{"*" : >{int(round(posw)) + 1}}', end='')
+        p = int(round(posw_zero)) - int(round(posw)) - 1
+        print("{:>{}}".format('|', p), end='')
     else:
         if posw_zero <= (characters + 5):
-            print("{:>{}}".format('|', posw_zero), end='')
+            print("{:>{}}".format('|', int(round(posw_zero))), end='')
             if posw <= (characters + 5):
-                print("{:>{}}".format('*', posw - posw_zero), end='')
+                p = int(round(posw)) - int(round(posw_zero))
+                print("{:>{}}".format('*', p), end='')
 
     print()
 
