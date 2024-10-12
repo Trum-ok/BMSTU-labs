@@ -8,15 +8,15 @@
 """
 
 # Ввод данных
-# tz = float(input("Введите начальное значение t0: "))
-# step = float(input("Введите шаг: "))
-# tn = float(input("Введите конечное значение tn: "))
-# characters = int(input("Введите ширину графика: "))
+tz = float(input("Введите начальное значение t0: "))
+step = float(input("Введите шаг: "))
+tn = float(input("Введите конечное значение tn: "))
+characters = int(input("Введите ширину графика: "))
 
-tz = -0.5
-step = 0.05
-tn = 0.5
-characters = 100
+# tz = -0.5
+# step = 0.05
+# tn = 0.5
+# characters = 100
 
 flag = (step <= 0) or (characters < 80) or (characters >= 180) or (tz >= tn)
 if flag:
@@ -36,7 +36,7 @@ print('+' + '-' * 30 + "+",
 
 for i in range(iters):
     W = (2048 * t0**12) - (6144 * t0**10) + (6912 * t0**8) - (3584 * t0**6) + (840 * t0**4) - (72 * t0**2) + 1  # noqa: E501
-    if abs(t0) < 1e-16:
+    if abs(t0) < 1e-3:
         t0 = 0.0
     if W < w_min:
         w_min = W
@@ -63,7 +63,6 @@ if not (4 <= ticks_w <= 8):
 
 # Шаг и засечки для оси W
 w_step = (w_max - w_min) / (ticks_w - 1)
-eps = 10
 
 print(' ' * 12, end='')
 for i in range(ticks_w):
@@ -100,13 +99,13 @@ for i in range(iters):
     if posw <= posw_zero:
         if posw <= (characters + 5):
             print(f'{"*" : >{int(round(posw)) + 1}}', end='')
-        p = int(round(posw_zero)) - int(round(posw)) - 1
+        p = abs(int(round(posw_zero)) - int(round(posw)) - 1)
         print("{:>{}}".format('|', p), end='')
     else:
         if posw_zero <= (characters + 5):
             print("{:>{}}".format('|', int(round(posw_zero))), end='')
             if posw <= (characters + 5):
-                p = int(round(posw)) - int(round(posw_zero))
+                p = abs(int(round(posw)) - int(round(posw_zero)))
                 print("{:>{}}".format('*', p), end='')
 
     print()
