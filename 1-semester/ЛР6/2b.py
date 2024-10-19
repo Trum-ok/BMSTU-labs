@@ -1,11 +1,14 @@
 lst = [float(x) for x in input("Введите элементы списка через пробел: ").split()]
 index = int(input("Введите индекс для удаления элемента: "))
 
-if -len(lst) <= index < len(lst):
-    for i in range(index, len(lst) - 1):
-        lst[i] = lst[i + 1]  # сдвиг элементов влево
-    lst.pop()  # уменьшение длины списка
-
-    print("Изменённый список:", lst)
+if index < 0:
+    print("Разрешены только положительные индексы")
 else:
-    print("Такого элемента нет в списке")
+    if index < len(lst):
+        for i in range(index, len(lst) - 1):
+            lst[i] = lst[i + 1]  # сдвиг элементов влево
+        lst = lst[:-1]
+
+        print("Изменённый список:", lst)
+    else:
+        print("Такого элемента нет в списке")
