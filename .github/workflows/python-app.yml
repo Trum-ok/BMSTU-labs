@@ -26,5 +26,6 @@ jobs:
 
     - name: Run tests
       run: |
-        cd 1-semestr
-        python -m unittest discover -s ЛР8/tests -p "test_*.py"
+          ls
+          cd 1-semestr
+          python -m unittest discover -s ЛР8/tests -p "test_*.py"
