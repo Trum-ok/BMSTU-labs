@@ -8,21 +8,21 @@ X.T` ?
 Также X.T дома:
 """
 
-def main(X: list[list[int]], m: int, n: int) -> list[list[int]]:
-    """Транспонирование матрицы"""
-    transposed = [[0] * m for _ in range(n)]
+def main(X: list[list[int]], n: int) -> list[list[int]]:
+    """Транспонирование квадратной матрицы на месте"""
+    for i in range(n):
+        for j in range(i + 1, n):  # проход только над главной диагональю
+            X[i][j], X[j][i] = X[j][i], X[i][j]
 
-    for i in range(m):
-        for j in range(n):
-            transposed[j][i] = X[i][j]  # X[i][j] на место [j][i]
-
-    return transposed
+    return X
 
 
 if __name__ == "__main__":
     m, n = map(int, input("Введите количество строк и столбцов через пробел: ").split())
     if m <= 0 or n <= 0:
         raise ValueError("Размер матрицы должен быть положительным!")
+    elif n != m:
+        raise ValueError("Матрица должна быть квадратной!")
 
     X = []
     for _ in range(m):
@@ -33,7 +33,7 @@ if __name__ == "__main__":
 
         X.append(a)
 
-    res = main(X, m, n)
+    res = main(X, n)
 
     print()
     for _ in res:
