@@ -18,18 +18,23 @@ def main(X: list[list[int]], n: int) -> list[list[int]]:
 
 
 if __name__ == "__main__":
-    m, n = map(int, input("Введите количество строк и столбцов через пробел: ").split())
-    if m <= 0 or n <= 0:
-        raise ValueError("Размер матрицы должен быть положительным!")
-    elif n != m:
-        raise ValueError("Матрица должна быть квадратной!")
+    n, m = 0, 0
+
+    while n <= 0 or m <= 0 or n != m:
+        m, n = map(int, input("Введите количество строк и столбцов через пробел: ").split())
+        if m <= 0 or n <= 0:
+            print("Размер матрицы должен быть положительным!")
+        elif n != m:
+            raise print("Матрица должна быть квадратной!")
 
     X = []
     for _ in range(m):
-        a = list(map(int, input(f"Введите элементы {_+1}-й строки матрицы через пробел: ").split()))
+        a = []
+        while len(a) != n:
+            a = list(map(int, input(f"Введите элементы {_+1}-й строки матрицы через пробел: ").split()))
 
-        if len(a) != n:
-            raise ValueError("Количество столбцов матрицы должно быть идентичным!")
+            if len(a) != n:
+                print("Количество столбцов матрицы должно быть идентичным!")
 
         X.append(a)
 
