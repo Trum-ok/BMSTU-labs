@@ -26,5 +26,11 @@ if __name__ == "__main__":
 
         X.append(a)
 
+    print("Исходная матрица...")
+    for i in range(m):
+        for j in range(n):
+            print(f"{X[i][j]:^15g}", end = ' ')
+        print()
+
     res = main(X, m)
     print(f"{res+1}-я строка матрицы имеет наибольшее среднее арифметическое")

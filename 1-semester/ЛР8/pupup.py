@@ -34,5 +34,11 @@ if __name__ == "__main__":
 
         X.append(a)
 
+    print("Исходная матрица...")
+    for i in range(m):
+        for j in range(n):
+            print(f"{X[i][j]:^15g}", end = ' ')
+        print()
+
     min_el, max_el = main(X, m, n)
     print(f"Минимальный элемент: {min_el}, максимальный: {max_el}")
