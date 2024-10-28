@@ -9,7 +9,6 @@ def main(X: list[list[int]], m: int) -> int:
             idx = i
             mean = s
 
-
     return idx
 
 

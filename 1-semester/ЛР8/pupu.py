@@ -38,5 +38,7 @@ if __name__ == "__main__":
     res = main(X, m, n)
 
     print()
-    for _ in res:
-        print(_)
+    for i in range(m):
+        for j in range(n):
+            print(f"{res[i][j]:^15g}", end = ' ')
+        print()
