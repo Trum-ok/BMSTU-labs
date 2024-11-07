@@ -3,8 +3,12 @@ name: Python application
 on:
   push:
     branches: [ master ]
+    paths:
+      - '1-semestr/ЛР8/**'
   pull_request:
     branches: [ master ]
+    paths:
+      - '1-semestr/ЛР8/**'
 
 jobs:
   build:
@@ -27,5 +31,5 @@ jobs:
     - name: Run tests
       run: |
           ls
-          cd 1-semester
+          cd 1-semestr
           python -m unittest discover -s ЛР8/tests -p "test_*.py"
