@@ -1,9 +1,3 @@
-"""
-Ввести трёхмерный массив (массив матриц размера X*Y*Z).
-Вывести срез массива по большему измерению, индекс среза – середина
-размерности с округлением в меньшую сторону
-"""
-
 from utils import print_matrix
 
 
@@ -35,7 +29,8 @@ def main() -> None:
         for j in range(y):
             row = list(map(int, input().split()))
             if len(row) != z:
-                raise ValueError(f"Каждая строка должна содержать ровно {z} элементов.")
+                print(f"Ошибка: каждая строка должна содержать ровно {z} элементов.")
+                return
             matrix.append(row)
         array.append(matrix)
 
@@ -49,9 +44,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except ValueError as e:
-        print(e)
-    except Exception as e:
-        print(f"Непредвиденная ошибка: \n{e}")
+    main()

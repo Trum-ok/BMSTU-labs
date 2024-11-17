@@ -1,9 +1,3 @@
-"""
-Дана матрица символов. Преобразовать её следующим образом:
-заменить все согласные латинские букв на заглавные, а все
-гласные латинские буквы на строчные. Вывести матрицу до преобразования и после.
-"""
-
 from utils import print_matrix
 
 
@@ -36,10 +30,9 @@ def main() -> None:
     for _ in range(n):
         row = list(input())
         if len(row) != m:
-            raise ValueError(f"Каждая строка должна содержать ровно {m} символов.")
+            print(f"Ошибка: каждая строка должна содержать ровно {m} символов.")
+            return
         matrix.append(row)
-
-    main(matrix)
 
     print("Матрица до преобразования:")
     print_matrix(matrix)
@@ -51,9 +44,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except ValueError as e:
-        print(e)
-    except Exception as e:
-        print(f"Непредвиденная ошибка: \n{e}")
+    main()

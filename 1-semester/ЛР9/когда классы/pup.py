@@ -53,14 +53,12 @@ def transform_matrix(matrix: list[list[float]], counts: list[int]) -> list[list[
     """
     num_rows = len(matrix)
     num_cols = len(matrix[0])
-    transformed_matrix = [
-        [
-            matrix[row][col] * counts[col] if counts[col] != 0 else matrix[row][col]
-            for col in range(num_cols)
-        ]
-        for row in range(num_rows)
-    ]
-    return transformed_matrix
+
+    for row in range(num_rows):
+        for col in range(num_cols):
+            count = counts[col]
+            if count != 0:
+                matrix[row][col] *= count
 
 
 if __name__ == "__main__":
