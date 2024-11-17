@@ -6,3 +6,5 @@ from ЛР5 import *
 from ЛР6 import *
 from ЛР7 import *
 from ЛР8 import *
+from ЛР9 import *
+from ЛР10 import *
