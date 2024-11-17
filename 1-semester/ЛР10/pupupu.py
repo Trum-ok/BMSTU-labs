@@ -53,7 +53,7 @@ def absolute_error(I_approx: float, I_exact: float) -> float:
     return abs(I_approx - I_exact)
 
 
-def relative_error(I_approx, I_exact) -> Optional[float]:
+def relative_error(I_approx: float, I_exact: float) -> Optional[float]:
     """Относительная ошибка (%)"""
     if I_exact == 0:
         return None
