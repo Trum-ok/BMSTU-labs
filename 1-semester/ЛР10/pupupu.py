@@ -4,13 +4,14 @@
 Назначение: программа для вычисления интеграла функции двумя методами с оценкой точности.
 (Метод правых треугольников и метод трапеций)
 """
-
 import math
 from typing import Optional
+
 
 # Функция для вычисления значений интегрируемой функции f(x)
 def f(x) -> float:
     return math.sin(x)  # Пример функции
+
 
 # Функция для вычисления первообразной F(x)
 def F(x) -> float:
@@ -28,8 +29,10 @@ def right_rectangle_method(a: float, b: float, n: int) -> float:
         float - ~значение интеграла
     """
     h = (b - a) / n
-    result = sum(f(a + i * h) for i in range(1, n + 1)) * h
-    return result
+    result = 0.0
+    for i in range(1, n + 1):
+        result += f(a + i * h)
+    return result * h
 
 
 def trapezoid_method(a: float, b: float, n: int) -> float:
@@ -43,9 +46,10 @@ def trapezoid_method(a: float, b: float, n: int) -> float:
         float - ~значение интеграла
     """
     h = (b - a) / n
-    result = (f(a) + f(b)) / 2 + sum(f(a + i * h) for i in range(1, n))
-    result *= h
-    return result
+    result = (f(a) + f(b)) / 2
+    for i in range(1, n):
+        result += f(a + i * h)
+    return result * h
 
 
 def absolute_error(I_approx: float, I_exact: float) -> float:
@@ -67,33 +71,29 @@ def main() -> None:
         b = float(input("Введите конец отрезка интегрирования (b): "))
         N1 = int(input("Введите количество участков разбиения N1: "))
         N2 = int(input("Введите количество участков разбиения N2: "))
+
+        if a == b:
+            print("Ошибка: начало и конец отрезка не могут быть одинаковыми!")
+            return
+        elif (a > b) and (a < 0):
+            print("Ошибка: начало отрезка не может быть больше конца!")
+            return
+        elif a > b and b < 0:
+            print("Ошибка: начало отрезка не может быть больше конца!")
+            return
+        if N1 <= 0 or N2 <= 0:
+            print("Количество разбиений должно быть натуральным числом!")
+            return
     except ValueError:
         print("Ошибка: введены некорректные данные!")
         return
 
     I_exact = F(b) - F(a)  # точное значение интеграла по первообразной
 
-    # вычисления для N1
-    try:
-        I1 = right_rectangle_method(a, b, N1)
-    except ZeroDivisionError:
-        I1 = None  # недопустимое разбиение для метода правых прямоугольников
-
-    try:
-        I3 = trapezoid_method(a, b, N1)
-    except ZeroDivisionError:
-        I3 = None  # недопустимое разбиение для метода трапеций
-
-    # вычисления для N2
-    try:
-        I2 = right_rectangle_method(a, b, N2)
-    except ZeroDivisionError:
-        I2 = None
-
-    try:
-        I4 = trapezoid_method(a, b, N2)
-    except ZeroDivisionError:
-        I4 = None
+    I1 = right_rectangle_method(a, b, N1)
+    I3 = trapezoid_method(a, b, N1)
+    I2 = right_rectangle_method(a, b, N2)
+    I4 = trapezoid_method(a, b, N2)
 
     # вывод таблицы
     print("\nТаблица результатов:")
@@ -103,12 +103,17 @@ def main() -> None:
 
     # оценка погрешностей
     for i, (I, n) in enumerate([(I1, N1), (I2, N2), (I3, N1), (I4, N2)], start=1):
-        if I is not None:
-            abs_err = absolute_error(I, I_exact)
-            rel_err = relative_error(I, I_exact)
-            print(f"\nМетод {1 if i <= 2 else 2}, N{1 if i % 2 != 0 else 2}:")
+        abs_err = absolute_error(I, I_exact)
+        rel_err = relative_error(I, I_exact)
+        print(f"\nМетод {1 if i <= 2 else 2}, N{1 if i % 2 != 0 else 2}:")
+        if abs_err is not None:
             print(f"Абсолютная погрешность: {abs_err:.7g}")
+        else:
+            print("Деление на ноль")
+        if rel_err is not None:
             print(f"Относительная погрешность: {rel_err:.7g}%")
+        else:
+            print("Деление на ноль")
 
     # определение наилучшего метода
     methods = ((I1, "Метод 1, N1"), (I2, "Метод 1, N2"), (I3, "Метод 2, N1"), (I4, "Метод 2, N2"))
@@ -117,7 +122,7 @@ def main() -> None:
 
     # уточнение количества отрезков для менее точного метода
     epsilon = float(input("Введите требуемую точность ε: "))
-    method_name = "Метод правых прямоугольников" if best_method[1].startswith("Метод 2") else "Метод трапеций"
+    method_name = "Метод правых прямоугольников" if best_method[1].startswith("Метод 1") else "Метод трапеций"
     n = N2 if best_method[1].endswith("N1") else N1
     I_old = best_method[0]
 
