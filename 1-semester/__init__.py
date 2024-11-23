@@ -8,3 +8,4 @@ from ЛР7 import *
 from ЛР8 import *
 from ЛР9 import *
 from ЛР10 import *
+from ЛР11 import *
