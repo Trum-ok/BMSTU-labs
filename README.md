@@ -80,6 +80,10 @@
  │   │   │   ├── pupupup.py
  │   │   │   └── utils.py
  │   │   └── readme.md
+ │   ├── ЛР10
+ │   │   └── pupupu.py
+ │   ├── ЛР11
+ │   │   └── quick.py
  │   └── __init__.py
  ├── pupupu  -  разные файлы
  │   └── ...
