@@ -83,7 +83,10 @@
  │   ├── ЛР10
  │   │   └── pupupu.py
  │   ├── ЛР11
- │   │   └── quick.py
+ │   │   ├── README.md
+ │   │   ├── data.py
+ │   │   ├── main.py
+ │   │   └── quick_sort.py
  │   └── __init__.py
  ├── pupupu  -  разные файлы
  │   └── ...
