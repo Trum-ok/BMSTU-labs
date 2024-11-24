@@ -25,13 +25,14 @@ def quick(arr: list[int]) -> tuple[list[int], int]:
         for i in range(len(arr)):
             if arr[i] < pivot[0]:
                 less.append(arr[i])
-                swaps += 1
+                if i > idx:
+                    swaps += 1
             elif arr[i] > pivot[0]:
                 greater.append(arr[i])
-                swaps += 1
+                if i < idx:
+                    swaps += 1
             elif arr[i] == pivot[0] and i != idx:
                 pivot.append(arr[i])
-                swaps += 1
 
         sorted_less, less_swaps = quick(less)
         sorted_greater, greater_swaps = quick(greater)
@@ -42,3 +43,5 @@ def quick(arr: list[int]) -> tuple[list[int], int]:
 
 if __name__ == "__main__":
     print(quick([1, 4, 2, 0, 1, 3]))
+    print(quick([1, 1, 1, 1, 1]))
+    print(quick([1, 2, 3, 4, 5]))
