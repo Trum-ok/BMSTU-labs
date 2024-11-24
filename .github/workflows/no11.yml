@@ -1,0 +1,35 @@
+name: Run tests for ЛР11 changes
+
+on:
+  push:
+    branches: [ master ]
+    paths:
+      - '1-semestr/ЛР11/**'
+  pull_request:
+    branches: [ master ]
+    paths:
+      - '1-semestr/ЛР11/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.12.5'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run tests
+      run: |
+          ls
+          cd 1-semestr
+          python -m unittest discover -s ЛР11/tests -p "test.py"
