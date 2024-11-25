@@ -42,6 +42,8 @@ def quick(arr: list[int]) -> tuple[list[int], int]:
 
 
 if __name__ == "__main__":
-    print(quick([1, 4, 2, 0, 1, 3]))
-    print(quick([1, 1, 1, 1, 1]))
-    print(quick([1, 2, 3, 4, 5]))
+    # print(quick([1, 4, 2, 0, 1, 3]))
+    # print(quick([1, 1, 1, 1, 1]))
+    # print(quick([1, 2, 3, 4, 5]))
+    print(quick(list(range(1000000))))
+    # print(sorted(list(range(1000000))))
